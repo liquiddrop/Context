@@ -2,15 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/sample_main_layout">
 
     <FrameLayout
-        android:id="@+id/sample_content_fragment"
+        android:id="@+id/content_fragment_dual_left"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/content_fragment_dual_right"
         android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="0px" />
-
+        android:layout_width="0px"
+        android:layout_height="match_parent" >
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/baseline_home_black"
+            android:layout_gravity="end|bottom"
+            android:contentDescription="@string/submit"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            android:layout_margin="16dp" />
+    </FrameLayout>
 </LinearLayout>

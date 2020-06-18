@@ -22,13 +22,13 @@
     android:orientation="horizontal">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewRight"
+        android:id="@+id/recyclerViewLeft"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewLeft"
+        android:id="@+id/recyclerViewRight"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent" />
