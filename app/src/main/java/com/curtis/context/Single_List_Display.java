@@ -1,5 +1,6 @@
 package com.curtis.context;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ public class Single_List_Display extends AppCompatActivity {
     public static final String TAG = "Single_List_Display";
 
     protected RecyclerViewFragment fragment;
+    protected Bundle extras;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,10 +72,11 @@ public class Single_List_Display extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_list);
         Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
+        extras = intent.getExtras();
         String message;
         if(extras != null){
             if(extras.containsKey("Country")){
@@ -93,9 +96,19 @@ public class Single_List_Display extends AppCompatActivity {
         }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new RecyclerViewFragment();
-        transaction.replace(R.id.sample_content_fragment, fragment);
+        transaction.replace(R.id.content_fragment_single, fragment);
         fragment.setArguments(extras);
         transaction.commit();
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AdditionActivity.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
     }
 
 }

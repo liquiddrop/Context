@@ -1,5 +1,7 @@
 package com.curtis.context;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -68,13 +70,23 @@ public class World_History extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world__history);
         setTitle("World History");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new RecyclerViewFragment();
-        transaction.replace(R.id.sample_content_fragment, fragment);
+        transaction.replace(R.id.content_fragment_single, fragment);
         transaction.commit();
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AdditionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

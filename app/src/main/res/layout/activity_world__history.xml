@@ -8,9 +8,23 @@
     android:id="@+id/sample_main_layout">
 
     <FrameLayout
-        android:id="@+id/sample_content_fragment"
+        android:id="@+id/content_fragment_single"
         android:layout_weight="2"
         android:layout_width="match_parent"
-        android:layout_height="0px" />
+        android:layout_height="0px" >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/fab_plus_icon"
+            android:layout_gravity="end|bottom"
+            android:contentDescription="@string/submit"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            android:layout_margin="16dp" />
+    </FrameLayout>
 
 </LinearLayout>
