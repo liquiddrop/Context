@@ -35,6 +35,7 @@ public class popUp extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Intent intent = getIntent();
+        String title = intent.getStringExtra("SUMMARY");
         String date = intent.getStringExtra("DATE");
         String city = intent.getStringExtra("CITY");
         String country = intent.getStringExtra("COUNTRY");
@@ -65,15 +66,21 @@ public class popUp extends Activity {
 
         getWindow().setLayout((int)(width*.85),(int)(height*.3));
 
+        TextView titleView = findViewById(R.id.Title);
         TextView dateView = findViewById(R.id.Date);
         TextView cityView = findViewById(R.id.City);
         TextView countryView = findViewById(R.id.Country);
         TextView summaryView = findViewById(R.id.Summary);
         TextView linkView = findViewById(R.id.WebLink);
 
-        dateView.setText("Date: " + date);
-        cityView.setText("City: " + city);
-        countryView.setText("Country: " + country);
+        titleView.setText(title);
+        if(date != null)
+            dateView.setText("Date: " + date);
+        if(city != null)
+            cityView.setText("City: " + city);
+        if(country != null)
+            countryView.setText("Country: " + country);
+
         summaryView.setMovementMethod(new ScrollingMovementMethod());
         summaryView.setText(summary);
         if(link != null) {
