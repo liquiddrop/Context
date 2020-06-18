@@ -20,13 +20,13 @@ public interface historical_event_dao {
     //@Query("SELECT * FROM historical_event_table where first_name LIKE  :firstName AND last_name LIKE :lastName")
     //User findByName(String firstName, String lastName);
 
-    @Query("SELECT * FROM historical_event_table where importance LIKE  :importance")
+    @Query("SELECT * FROM historical_event_table where importance LIKE  :importance ORDER BY year ASC")
     LiveData<List<historical_event>> findByImportance(int importance);
 
-    @Query("SELECT * FROM historical_event_table where location_country LIKE  :country")
+    @Query("SELECT * FROM historical_event_table where location_country LIKE  :country ORDER BY year ASC")
     LiveData<List<historical_event>> findByCountry(String country);
 
-    @Query("SELECT * FROM historical_event_table where location_city LIKE  :city")
+    @Query("SELECT * FROM historical_event_table where location_city LIKE  :city ORDER BY year ASC")
     LiveData<List<historical_event>> findByCity(String city);
 
     @Query("SELECT COUNT(*) from historical_event_table")
