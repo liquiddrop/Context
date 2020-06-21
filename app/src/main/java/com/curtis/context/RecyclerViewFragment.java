@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class RecyclerViewFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
 
     public RecyclerView mRecyclerView;
+    public TextView mEmptyView;
     protected HistoricalEventListAdapter adapter;
     protected LinearLayoutManager mLayoutManager;
     protected HistoricalEventViewModel viewModel;
@@ -69,6 +71,7 @@ public class RecyclerViewFragment extends Fragment {
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mEmptyView = (TextView) rootView.findViewById(R.id.empty_list_text);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -85,7 +88,14 @@ public class RecyclerViewFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable final List<historical_event> events) {
                     // Update the cached copy of the words in the adapter.
+                    Log.i(TAG, "In get events with importance");
                     adapter.setmEvents(events);
+                    if(events.isEmpty())
+                    {
+                        mEmptyView.setVisibility(View.VISIBLE);
+                        mRecyclerView.setVisibility(View.GONE);
+                        Log.i(TAG, "Important events is empty!");
+                    }
                 }
             });
         }
@@ -100,6 +110,12 @@ public class RecyclerViewFragment extends Fragment {
                     public void onChanged(@Nullable final List<historical_event> events) {
                         // Update the cached copy of the words in the adapter.
                         adapter.setmEvents(events);
+                        if(events.isEmpty())
+                        {
+                            mEmptyView.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                            Log.i(TAG, "Country list is empty");
+                        }
                     }
                 });
             }
@@ -110,6 +126,12 @@ public class RecyclerViewFragment extends Fragment {
                     public void onChanged(@Nullable final List<historical_event> events) {
                         // Update the cached copy of the words in the adapter.
                         adapter.setmEvents(events);
+                        if(events.isEmpty())
+                        {
+                            mEmptyView.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                            Log.i(TAG, "City list is empty");
+                        }
                     }
                 });
             }
