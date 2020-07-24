@@ -73,7 +73,9 @@ public class popUp extends Activity {
         TextView summaryView = findViewById(R.id.Summary);
         TextView linkView = findViewById(R.id.WebLink);
 
-        titleView.setText(title);
+        if(title != null)
+            titleView.setText(title);
+
         if(date != null)
             dateView.setText("Date: " + date);
         if(city != null)
@@ -82,7 +84,10 @@ public class popUp extends Activity {
             countryView.setText("Country: " + country);
 
         summaryView.setMovementMethod(new ScrollingMovementMethod());
-        summaryView.setText(summary);
+
+        if(summary != null)
+            summaryView.setText(summary);
+
         if(link != null) {
             linkView.setText(link);
         }
