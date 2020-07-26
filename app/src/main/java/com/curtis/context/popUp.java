@@ -93,7 +93,7 @@ public class popUp extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.85),(int)(height*.3));
+        getWindow().setLayout((int)(width*.85),(int)(height*.45));
 
         TextView titleView = findViewById(R.id.Title);
         TextView dateView = findViewById(R.id.Date);
