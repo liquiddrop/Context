@@ -57,7 +57,6 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getContext().deleteDatabase("historical_events_database.db");
         Log.i(TAG, "Entering onCreate");
         viewModel = ViewModelProviders.of(this).get(HistoricalEventViewModel.class);
     }
@@ -121,7 +120,7 @@ public class RecyclerViewFragment extends Fragment {
             }
             else if(extras.containsKey("City")){
                 searchString = extras.getString("City");
-                viewModel.getmCityEvents(searchString).observe(this, new Observer<List<historical_event>>() {
+                viewModel.getCityEvents(searchString).observe(this, new Observer<List<historical_event>>() {
                     @Override
                     public void onChanged(@Nullable final List<historical_event> events) {
                         // Update the cached copy of the words in the adapter.

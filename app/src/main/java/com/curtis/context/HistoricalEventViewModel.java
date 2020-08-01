@@ -52,8 +52,16 @@ public class HistoricalEventViewModel extends AndroidViewModel {
         return mRepository.getCountryEvents(search);
     }
 
-    LiveData<List<historical_event>> getmCityEvents(String search) {
+    LiveData<List<historical_event>> getCityEvents(String search) {
         return mRepository.getCityEvents(search);
+    }
+
+    LiveData<List<String>> getAllCountries() {
+        return mRepository.getAllCountries();
+    }
+
+    LiveData<List<String>> getAllCities() {
+        return mRepository.getAllCities();
     }
 
     public void insert(historical_event event) { mRepository.insert(event); }

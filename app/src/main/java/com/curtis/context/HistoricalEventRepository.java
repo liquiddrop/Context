@@ -39,6 +39,13 @@ public class HistoricalEventRepository {
         return mEventDao.findByCity(search);
     }
 
+    LiveData<List<String>> getAllCountries() {
+        return mEventDao.getAllCountries();
+    }
+
+    LiveData<List<String>> getAllCities() {
+        return mEventDao.getAllCities();
+    }
     /*
     void getAllEvents(LoadUserCallback callback) {
         final WeakReference<LoadUserCallback> loadUserCallback = new WeakReference<>(callback);
