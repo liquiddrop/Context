@@ -1,0 +1,24 @@
+[Complete]----Fix search/scrolling in recylerview
+[Complete]----Change search buttons to Go buttons
+[Complete]----change world history button
+[Complete]----make world history text also go to world history activity
+[Complete]----Error checking on inputs
+[Complete]----add plus button to world history and single timeline
+[Complete]----add home button 
+[Complete]----change world history button to only pick 5 importance
+[Complete]----add pictures
+[Complete]----add links
+[Complete]----make the picture always be one size
+[Complete]----add zoom in for the picture
+[Complete]----update layout for the pop up to be the same as the post it
+[Complete]----add entry if empty list is returned
+[Complete]----wrap text if title of event goes over frame layout
+
+Change search on main activity page to seach + drop down
+test different layouts for the pop up to see what looks the best
+change search so you can search for more than numbers
+make layout look nicer
+------test country and city searching/impliment
+add scroll to top button
+figure out how to load database on startup/in main activity
+Update checking inputs for BC and AD
