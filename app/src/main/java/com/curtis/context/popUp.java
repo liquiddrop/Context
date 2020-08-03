@@ -104,25 +104,37 @@ public class popUp extends Activity {
 
         if(title != null)
             titleView.setText(title);
+        else
+            titleView.setVisibility(View.GONE);
 
         if(date != null)
             dateView.setText("Date: " + date);
+        else
+            dateView.setVisibility(View.GONE);
+
         if(city != null)
             cityView.setText("City: " + city);
+        else
+            cityView.setVisibility(View.GONE);
+
         if(country != null)
             countryView.setText("Country: " + country);
+        else
+            countryView.setVisibility(View.GONE);
 
         summaryView.setMovementMethod(new ScrollingMovementMethod());
 
         if(summary != null)
             summaryView.setText(summary);
+        else
+            summaryView.setVisibility(View.GONE);
 
         if(link != null) {
             linkView.setText(link);
         }
         else
         {
-            linkView.setVisibility(TextView.INVISIBLE);
+            linkView.setVisibility(View.GONE);
         }
     }
 
