@@ -36,6 +36,7 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                     historical_event current_event = mEvents.get(getAdapterPosition());
                     Intent myIntent = new Intent(context, popUp.class);
+                    myIntent.putExtra("SUMMARY", current_event.mSummary );
                     myIntent.putExtra("DATE", current_event.mDate_string );
                     myIntent.putExtra("CITY", current_event.mCity);
                     myIntent.putExtra("COUNTRY", current_event.mCountry);
