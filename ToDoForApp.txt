@@ -13,12 +13,12 @@
 [Complete]----update layout for the pop up to be the same as the post it
 [Complete]----add entry if empty list is returned
 [Complete]----wrap text if title of event goes over frame layout
+[Complete]----Change search on main activity page to seach + drop down
+[Complete]----test country and city searching/impliment
+[Complete]----figure out how to load database on startup/in main activity
 
-Change search on main activity page to seach + drop down
 test different layouts for the pop up to see what looks the best
-change search so you can search for more than numbers
+change search so you can search for more than numbers ie for events
 make layout look nicer
-------test country and city searching/impliment
 add scroll to top button
-figure out how to load database on startup/in main activity
 Update checking inputs for BC and AD
