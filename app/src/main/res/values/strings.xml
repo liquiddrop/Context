@@ -10,4 +10,6 @@
     <string name="title_activity_splash_screen">splash_screen</string>
     <string name="title_activity_world__history">World_History</string>
     <string name="submit">Submit</string>
+    <string name="pic1">Pic to Display</string>
+    <string name="pic2">Zoomed in picture</string>
 </resources>

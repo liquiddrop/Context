@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".popUp"
-            android:theme="@style/AppTheme.popup" />
+            android:theme="@style/simplePopupStyle"/>
         <activity
             android:name=".World_History"
             android:label="@string/title_activity_world__history"
