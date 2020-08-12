@@ -26,4 +26,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="simplePopupStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textColor">@color/dialogBlack</item>
+        <item name="android:fontFamily">@font/arial</item>
+    </style>
+
 </resources>

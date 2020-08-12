@@ -63,7 +63,7 @@ public class popUp extends Activity {
         if(picture_path != null) {
             final Bitmap bitmap = getBitmapFromAsset(picture_path);
             if (bitmap != null) {
-                setContentView(R.layout.pop_up_window_picture);
+                setContentView(R.layout.pop_up_window_picture_simple);
                 final ImageButton displayPicture = (ImageButton) findViewById(R.id.picture);
                 displayPicture.setImageBitmap(bitmap);
                 //set on click listener to zoom the picture
@@ -75,12 +75,12 @@ public class popUp extends Activity {
                     }
                 });
             } else {
-                setContentView(R.layout.pop_up_window);
+                setContentView(R.layout.pop_up_window_simple);
             }
         }
         else
         {
-            setContentView(R.layout.pop_up_window);
+            setContentView(R.layout.pop_up_window_simple);
         }
 
         // Retrieve and cache the system's default "short" animation time.
@@ -108,17 +108,20 @@ public class popUp extends Activity {
             titleView.setVisibility(View.GONE);
 
         if(date != null)
-            dateView.setText("Date: " + date);
+            dateView.setText(date);
         else
             dateView.setVisibility(View.GONE);
 
         if(city != null)
-            cityView.setText("City: " + city);
+            cityView.setText(city);
         else
             cityView.setVisibility(View.GONE);
 
         if(country != null)
-            countryView.setText("Country: " + country);
+            if(city != null)
+                countryView.setText(", " + country);
+            else
+                countryView.setText(country);
         else
             countryView.setVisibility(View.GONE);
 
@@ -180,7 +183,7 @@ public class popUp extends Activity {
         //Because of the way the pop up scaling interacts with getGlobalVisibleRect I need to update
         //the offset on the final bounds a little or the enlarged picture appears off center
         startBounds.offset(-globalOffset.x, -globalOffset.y);
-        finalBounds.offset(-(globalOffset.x-20), -(globalOffset.y-15));
+        finalBounds.offset(-(globalOffset.x), -(globalOffset.y));
 
         // Adjust the start bounds to be the same aspect ratio as the final
         // bounds using the "center crop" technique. This prevents undesirable
