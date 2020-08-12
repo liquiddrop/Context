@@ -180,8 +180,7 @@ public class popUp extends Activity {
         thumbView.getGlobalVisibleRect(startBounds);
         findViewById(R.id.pop_up_container)
                 .getGlobalVisibleRect(finalBounds, globalOffset);
-        //Because of the way the pop up scaling interacts with getGlobalVisibleRect I need to update
-        //the offset on the final bounds a little or the enlarged picture appears off center
+
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-(globalOffset.x), -(globalOffset.y));
 
