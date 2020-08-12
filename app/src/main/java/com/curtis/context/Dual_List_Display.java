@@ -97,14 +97,14 @@ public class Dual_List_Display extends AppCompatActivity {
                 has_multi = true;
                 extras_left.putString(multi_message[0], multi_message[1]);
                 extras_right.putString(multi_message[2], multi_message[3]);
-                setTitle("History of " + multi_message[1] + " vs " + multi_message[3]);
+                setTitle( multi_message[1] + " vs " + multi_message[3]);
             }
             else {
                 message = "There was no input!";
             }
             Log.i(TAG, "Clicked Go for " + message);
             if(!has_multi)
-                setTitle("History of " + message + " vs World");
+                setTitle(message + " vs World");
         }
         else{
             setTitle("No Input!!");
