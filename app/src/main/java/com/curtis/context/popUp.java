@@ -50,6 +50,7 @@ public class popUp extends Activity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        double heightMultiplier=.4;
         Intent intent = getIntent();
         String title = intent.getStringExtra("SUMMARY");
         String date = intent.getStringExtra("DATE");
@@ -64,6 +65,7 @@ public class popUp extends Activity {
             final Bitmap bitmap = getBitmapFromAsset(picture_path);
             if (bitmap != null) {
                 setContentView(R.layout.pop_up_window_picture_simple);
+                heightMultiplier=.45;
                 final ImageButton displayPicture = (ImageButton) findViewById(R.id.picture);
                 displayPicture.setImageBitmap(bitmap);
                 //set on click listener to zoom the picture
@@ -76,11 +78,13 @@ public class popUp extends Activity {
                 });
             } else {
                 setContentView(R.layout.pop_up_window_simple);
+                heightMultiplier=.35;
             }
         }
         else
         {
             setContentView(R.layout.pop_up_window_simple);
+            heightMultiplier=.35;
         }
 
         // Retrieve and cache the system's default "short" animation time.
@@ -93,7 +97,7 @@ public class popUp extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.85),(int)(height*.45));
+        getWindow().setLayout((int)(width*.85),(int)(height*heightMultiplier));
 
         TextView titleView = findViewById(R.id.Title);
         TextView dateView = findViewById(R.id.Date);
