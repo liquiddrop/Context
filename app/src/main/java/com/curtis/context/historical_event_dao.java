@@ -29,6 +29,12 @@ public interface historical_event_dao {
     @Query("SELECT * FROM historical_event_table where location_city LIKE  :city ORDER BY year ASC")
     LiveData<List<historical_event>> findByCity(String city);
 
+    @Query("SELECT * FROM historical_event_table where year LIKE  :year ORDER BY year ASC")
+    LiveData<List<historical_event>> findByYear(int year);
+
+    @Query("SELECT * FROM historical_event_table where summary LIKE  '%' || :event || '%' OR full_summary LIKE  '%' || :event || '%' ORDER BY year ASC")
+    LiveData<List<historical_event>> findByEvent(String event);
+
     @Query("SELECT location_country FROM historical_event_table where location_country is not null")
     LiveData<List<String>> getAllCountries();
 

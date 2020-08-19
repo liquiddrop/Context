@@ -39,6 +39,14 @@ public class HistoricalEventRepository {
         return mEventDao.findByCity(search);
     }
 
+    LiveData<List<historical_event>> getYearEvents(int searchYear) {
+        return mEventDao.findByYear(searchYear);
+    }
+
+    LiveData<List<historical_event>> getSpecificEvents(String search) {
+        return mEventDao.findByEvent(search);
+    }
+
     LiveData<List<String>> getAllCountries() {
         return mEventDao.getAllCountries();
     }

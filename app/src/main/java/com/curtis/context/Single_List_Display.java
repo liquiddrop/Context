@@ -85,6 +85,12 @@ public class Single_List_Display extends AppCompatActivity {
             else if(extras.containsKey("City")){
                 message = intent.getStringExtra("City");
             }
+            else if(extras.containsKey("Year")){
+                message = intent.getStringExtra("Year");
+            }
+            else if(extras.containsKey("Event")){
+                message = intent.getStringExtra("Event");
+            }
             else {
                 message = "There was no input!";
             }

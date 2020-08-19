@@ -102,6 +102,7 @@ public class RecyclerViewFragment extends Fragment {
         {
             Log.i(TAG, "There were arguenmts passed into the fragment ");
             String searchString;
+            int searchYear;
             if(extras.containsKey("Country")){
                 searchString = extras.getString("Country");
                 viewModel.getCountryEvents(searchString).observe(this, new Observer<List<historical_event>>() {
@@ -121,6 +122,47 @@ public class RecyclerViewFragment extends Fragment {
             else if(extras.containsKey("City")){
                 searchString = extras.getString("City");
                 viewModel.getCityEvents(searchString).observe(this, new Observer<List<historical_event>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<historical_event> events) {
+                        // Update the cached copy of the words in the adapter.
+                        adapter.setmEvents(events);
+                        if(events.isEmpty())
+                        {
+                            mEmptyView.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                            Log.i(TAG, "City list is empty");
+                        }
+                    }
+                });
+            }
+            else if(extras.containsKey("Year")){
+                searchString = "Year " + extras.getString("Year");
+                //change string to int and see if it is bc which turns it to a negative year
+                if(searchString.toLowerCase().contains("bc"))
+                {
+                    searchYear = -Integer.parseInt(searchString.replaceAll("[^0-9]", ""));
+                }
+                else
+                {
+                    searchYear = Integer.parseInt(searchString.replaceAll("[^0-9]", ""));
+                }
+                viewModel.getYearEvents(searchYear).observe(this, new Observer<List<historical_event>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<historical_event> events) {
+                        // Update the cached copy of the words in the adapter.
+                        adapter.setmEvents(events);
+                        if(events.isEmpty())
+                        {
+                            mEmptyView.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                            Log.i(TAG, "City list is empty");
+                        }
+                    }
+                });
+            }
+            else if(extras.containsKey("Event")){
+                searchString = extras.getString("Event");
+                viewModel.getSpecificEvents(searchString).observe(this, new Observer<List<historical_event>>() {
                     @Override
                     public void onChanged(@Nullable final List<historical_event> events) {
                         // Update the cached copy of the words in the adapter.

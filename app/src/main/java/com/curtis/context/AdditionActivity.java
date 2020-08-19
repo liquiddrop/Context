@@ -31,6 +31,9 @@ public class AdditionActivity extends AppCompatActivity {
     private String[] cityArray;
     protected HistoricalEventViewModel viewModel;
     private Context context = this;
+    private static boolean extraDebug=false;
+
+    private static String[] bundleKeys = { "Country","City","Year","Event", "Multi" };
 
     //function to sort by most common occurance and get rid of duplicates in a list of strings
     public String[] sortMostCommon(List<String> input)
@@ -67,10 +70,11 @@ public class AdditionActivity extends AppCompatActivity {
         String output[] = new String[list.size()];
         int j=list.size()-1;
         for (Map.Entry<String, Integer> aa : list) {
-            Log.i(TAG, "Key " + aa.getKey() + " NumOccur: " + aa.getValue());
+            if(extraDebug) {
+                Log.i(TAG, "Key " + aa.getKey() + " NumOccur: " + aa.getValue());
+            }
             output[j] = aa.getKey();
             j--;
-            //temp.put(aa.getKey(), aa.getValue());
         }
         return output;
     };
@@ -80,23 +84,20 @@ public class AdditionActivity extends AppCompatActivity {
         Log.i(TAG, "We are in on Create of Main activity");
         context = this;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tile);
         setTitle("Add Timeline");
 
         Log.i(TAG, "We are in on Create of Addition activity");
         Intent intent = getIntent();
         extras = intent.getExtras();
+        Value = "There was no input!";
         if(extras != null){
-            if(extras.containsKey("Country")){
-                Value = intent.getStringExtra("Country");
-                Key = "Country";
-            }
-            else if(extras.containsKey("City")){
-                Value = intent.getStringExtra("City");
-                Key = "City";
-            }
-            else {
-                Value = "There was no input!";
+            for(int i=0; i< bundleKeys.length; i++)
+            {
+                if(extras.containsKey(bundleKeys[i])) {
+                    Value = intent.getStringExtra(bundleKeys[i]);
+                    Key = bundleKeys[i];
+                }
             }
             Log.i(TAG, "Clicked Go for " + Value);
         }
@@ -117,12 +118,13 @@ public class AdditionActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    for (int i = 0; i < countries.size(); i++) {
-                        Log.i(TAG, "Country " + countries.get(i));
+                    if(extraDebug) {
+                        for (int i = 0; i < countries.size(); i++) {
+                            Log.i(TAG, "Country " + countries.get(i));
+                        }
                     }
                     countryArray = new String[countries.size()];
                     countryArray = sortMostCommon(countries);
-                    //countries.toArray(countryArray);
                     ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_dropdown_item_1line, countryArray);
                     final AutoCompleteTextView countryView = (AutoCompleteTextView)
@@ -151,12 +153,13 @@ public class AdditionActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    for (int i = 0; i < cities.size(); i++) {
-                        Log.i(TAG, "City " + cities.get(i));
+                    if(extraDebug) {
+                        for (int i = 0; i < cities.size(); i++) {
+                            Log.i(TAG, "City " + cities.get(i));
+                        }
                     }
                     cityArray = new String[cities.size()];
                     cityArray = sortMostCommon(cities);
-                    //cities.toArray(cityArray);
                     ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_dropdown_item_1line, cityArray);
                     final AutoCompleteTextView cityView = (AutoCompleteTextView)
@@ -189,49 +192,55 @@ public class AdditionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToCountry(View v)
+    public void clickedSearch(View v)
     {
         context = this;
-        EditText inputText = (EditText)findViewById(R.id.countryEditText);
-        String content = inputText.getText().toString(); //gets you the contents of edit text
-        Log.i(TAG, "Clicked Go for country " + content);
+        AutoCompleteTextView countryText = (AutoCompleteTextView) findViewById(R.id.countryEditText);
+        AutoCompleteTextView cityText = (AutoCompleteTextView) findViewById(R.id.cityEditText);
+        AutoCompleteTextView yearText = (AutoCompleteTextView) findViewById(R.id.yearEditText);
+        AutoCompleteTextView eventText = (AutoCompleteTextView) findViewById(R.id.eventEditText);
+        Intent intent = new Intent(context, Dual_List_Display.class);
         String[] multi_message = new String[4];
-        Intent intent;
-        if(extras != null) {
-            intent = new Intent(context, Dual_List_Display.class);
-            multi_message[0] = Key;
-            multi_message[1] = Value;
+
+        if(!countryText.getText().toString().equals(""))
+        {
+            String content = countryText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for country " + content);
             multi_message[2] = "Country";
             multi_message[3] = content;
-            intent.putExtra("Multi", multi_message);
         }
-        else {
-            intent = new Intent(context, Dual_List_Display.class);
-            intent.putExtra("Country", content);
-        }
-        startActivity(intent);
-    }
-
-    public void goToCity(View v)
-    {
-        context = this;
-        EditText inputText = (EditText)findViewById(R.id.cityEditText);
-        String content = inputText.getText().toString(); //gets you the contents of edit text
-        Log.i(TAG, "Clicked Go for city " + content);
-        String[] multi_message = new String[4];
-        Intent intent;
-        if(extras != null) {
-            intent = new Intent(context, Dual_List_Display.class);
-            multi_message[0] = Key;
-            multi_message[1] = Value;
+        if(!cityText.getText().toString().equals(""))
+        {
+            String content = cityText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for city " + content);
             multi_message[2] = "City";
             multi_message[3] = content;
+        }
+        if(!yearText.getText().toString().equals(""))
+        {
+            String content = yearText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for year " + content);
+            multi_message[2] = "Year";
+            multi_message[3] = content;
+        }
+        if(!eventText.getText().toString().equals(""))
+        {
+            String content = eventText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for event " + content);
+            multi_message[2] = "Event";
+            multi_message[3] = content;
+        }
+        if(extras != null) {
+            //If we are passed in something then make sure to pass it along
+            multi_message[0] = Key;
+            multi_message[1] = Value;
             intent.putExtra("Multi", multi_message);
         }
-        else {
-            intent = new Intent(context, Dual_List_Display.class);
-            intent.putExtra("City", content);
+        else
+        {
+            intent.putExtra(multi_message[2], multi_message[3]);
         }
         startActivity(intent);
+        return;
     }
 }

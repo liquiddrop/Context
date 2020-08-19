@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton world_button;
     private Context context = this;
+    private static boolean extraDebug=false;
 
     private static String[] countrySuggestions = { "United States","Italy","Greece","Germany","France","China","England","Egypt","Russia" };
     private static String[] citySuggestions = { "Washington","Rome","Berlin","New York","Paris","Athens","Jerusalem" };
@@ -85,10 +86,11 @@ public class MainActivity extends AppCompatActivity {
         String output[] = new String[list.size()];
         int j=list.size()-1;
         for (Map.Entry<String, Integer> aa : list) {
-            Log.i(TAG, "Key " + aa.getKey() + " NumOccur: " + aa.getValue());
+            if(extraDebug) {
+                Log.i(TAG, "Key " + aa.getKey() + " NumOccur: " + aa.getValue());
+            }
             output[j] = aa.getKey();
             j--;
-            //temp.put(aa.getKey(), aa.getValue());
         }
         return output;
     };
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "We are in on Create of Main activity");
         context = this;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tile);
 
         context.deleteDatabase("historical_events_database.db");
         Log.i(TAG, "Entering onCreate");
@@ -115,12 +117,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    for (int i = 0; i < countries.size(); i++) {
-                        Log.i(TAG, "Country " + countries.get(i));
+                    if(extraDebug) {
+                        for (int i = 0; i < countries.size(); i++) {
+                            Log.i(TAG, "Country " + countries.get(i));
+                        }
                     }
                     countryArray = new String[countries.size()];
                     countryArray = sortMostCommon(countries);
-                    //countries.toArray(countryArray);
                     ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_dropdown_item_1line, countryArray);
                     final AutoCompleteTextView countryView = (AutoCompleteTextView)
@@ -149,12 +152,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    for (int i = 0; i < cities.size(); i++) {
-                        Log.i(TAG, "City " + cities.get(i));
+                    if(extraDebug) {
+                        for (int i = 0; i < cities.size(); i++) {
+                            Log.i(TAG, "City " + cities.get(i));
+                        }
                     }
                     cityArray = new String[cities.size()];
                     cityArray = sortMostCommon(cities);
-                    //cities.toArray(cityArray);
                     ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_dropdown_item_1line, cityArray);
                     final AutoCompleteTextView cityView = (AutoCompleteTextView)
@@ -171,15 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        if (savedInstanceState == null) {
-            /*
-            Log.i(TAG, "savedInstanceState is null");
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            fragment = new RecyclerViewFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-            */
-        }
     }
 
     public void goToWorldHistory(View v)
@@ -189,26 +184,47 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToCountry(View v)
+    public void clickedSearch(View v)
     {
         context = this;
-        EditText inputText = (EditText)findViewById(R.id.countryEditText);
-        String content = inputText.getText().toString(); //gets you the contents of edit text
-        Log.i(TAG, "Clicked Go for country " + content);
+        AutoCompleteTextView countryText = (AutoCompleteTextView) findViewById(R.id.countryEditText);
+        AutoCompleteTextView cityText = (AutoCompleteTextView) findViewById(R.id.cityEditText);
+        AutoCompleteTextView yearText = (AutoCompleteTextView) findViewById(R.id.yearEditText);
+        AutoCompleteTextView eventText = (AutoCompleteTextView) findViewById(R.id.eventEditText);
         Intent intent = new Intent(context, Single_List_Display.class);
-        intent.putExtra("Country", content);
-        startActivity(intent);
-    }
 
-    public void goToCity(View v)
-    {
-        context = this;
-        EditText inputText = (EditText)findViewById(R.id.cityEditText);
-        String content = inputText.getText().toString(); //gets you the contents of edit text
-        Log.i(TAG, "Clicked Go for city " + content);
-        Intent intent = new Intent(context, Single_List_Display.class);
-        intent.putExtra("City", content);
-        startActivity(intent);
+        if(!countryText.getText().toString().equals(""))
+        {
+            String content = countryText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for country " + content);
+            intent.putExtra("Country", content);
+            startActivity(intent);
+            return;
+        }
+        if(!cityText.getText().toString().equals(""))
+        {
+            String content = cityText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for city " + content);
+            intent.putExtra("City", content);
+            startActivity(intent);
+            return;
+        }
+        if(!yearText.getText().toString().equals(""))
+        {
+            String content = yearText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for year " + content);
+            intent.putExtra("Year", content);
+            startActivity(intent);
+            return;
+        }
+        if(!eventText.getText().toString().equals(""))
+        {
+            String content = eventText.getText().toString(); //gets you the contents of edit text
+            Log.i(TAG, "Clicked search for event " + content);
+            intent.putExtra("Event", content);
+            startActivity(intent);
+            return;
+        }
     }
 
     /**

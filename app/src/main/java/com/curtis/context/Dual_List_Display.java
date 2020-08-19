@@ -26,6 +26,8 @@ public class Dual_List_Display extends AppCompatActivity {
     protected RecyclerViewFragment fragment_left;
     protected RecyclerViewFragment fragment_right;
 
+    private static String[] bundleKeys = { "Country","City","Year","Event", "Multi" };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -80,27 +82,28 @@ public class Dual_List_Display extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         Bundle extras_left = intent.getExtras(), extras_right = intent.getExtras();
-        String message;
+        String message="There was no input!";
         String[] multi_message;
         boolean has_multi = false;
         if(extras != null){
-            if(extras.containsKey("Country")){
-                message = intent.getStringExtra("Country");
-            }
-            else if(extras.containsKey("City")){
-                message = intent.getStringExtra("City");
-            }
-            else if(extras.containsKey("Multi")){
-                multi_message = intent.getStringArrayExtra("Multi");
-                message = "Check multi";
-                Log.i(TAG, "Clicked Go for " + multi_message[0] + " " + multi_message[1] + " " + multi_message[2] + " " + multi_message[3]);
-                has_multi = true;
-                extras_left.putString(multi_message[0], multi_message[1]);
-                extras_right.putString(multi_message[2], multi_message[3]);
-                setTitle( multi_message[1] + " vs " + multi_message[3]);
-            }
-            else {
-                message = "There was no input!";
+            for(int i=0; i< bundleKeys.length; i++)
+            {
+                if(extras.containsKey(bundleKeys[i]))
+                {
+                    if(bundleKeys[i].equalsIgnoreCase("Multi"))
+                    {
+                        multi_message = intent.getStringArrayExtra("Multi");
+                        message = "Check multi";
+                        Log.i(TAG, "Clicked Go for " + multi_message[0] + " " + multi_message[1] + " " + multi_message[2] + " " + multi_message[3]);
+                        has_multi = true;
+                        extras_left.putString(multi_message[0], multi_message[1]);
+                        extras_right.putString(multi_message[2], multi_message[3]);
+                        setTitle( multi_message[1] + " vs " + multi_message[3]);
+                    }
+                    else {
+                        message = intent.getStringExtra(bundleKeys[i]);
+                    }
+                }
             }
             Log.i(TAG, "Clicked Go for " + message);
             if(!has_multi)
@@ -122,7 +125,7 @@ public class Dual_List_Display extends AppCompatActivity {
             fragment_right.setArguments(extras_right);
             transaction_right.commit();
         }
-        else {
+        else if(extras != null){
             FragmentTransaction transaction_left = getSupportFragmentManager().beginTransaction();
             fragment_left = new RecyclerViewFragment();
             transaction_left.replace(R.id.content_fragment_dual_left, fragment_left);
@@ -132,6 +135,12 @@ public class Dual_List_Display extends AppCompatActivity {
             fragment_right = new RecyclerViewFragment();
             transaction_right.replace(R.id.content_fragment_dual_right, fragment_right);
             transaction_right.commit();
+        }
+        else
+        {
+            //if we get here than we have no input to look up just go strait to world history
+            Intent wolrdHistoryIntent = new Intent(context, World_History.class);
+            startActivity(wolrdHistoryIntent);
         }
 
         FloatingActionButton fab = findViewById(R.id.floatingActionHome);
