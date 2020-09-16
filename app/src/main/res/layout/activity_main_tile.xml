@@ -8,7 +8,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/countryEditText"
-        android:layout_width="202dp"
+        android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -26,7 +26,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/cityEditText"
-        android:layout_width="202dp"
+        android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -42,7 +42,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/yearEditText"
-        android:layout_width="202dp"
+        android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -58,7 +58,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/eventEditText"
-        android:layout_width="202dp"
+        android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -76,14 +76,13 @@
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
         android:background="@drawable/rounded_blue"
         android:onClick="clickedSearch"
         android:text="Search"
         app:layout_constraintBaseline_toBaselineOf="@id/cityEditText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cityEditText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.146" />
 
@@ -101,5 +100,19 @@
         app:layout_constraintVertical_bias="0.234"
         app:layout_constraintEnd_toEndOf="@id/searchButton"
         app:layout_constraintStart_toStartOf="@id/searchButton"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventEditText"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/context_app_background" />
+
 
 </android.support.constraint.ConstraintLayout>
