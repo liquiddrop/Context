@@ -5,7 +5,7 @@ historical data. You can search through the database by
 
 location, date, or search for keywords in the event.
 
-I though this would be usefull for providing
+I thought this would be useful for providing
 
 historical context for things seen while traveling. You can also
 
@@ -27,4 +27,4 @@ is in the repo "python_create_database". The database is not included
 
 in this repository. The layout of the timeline list is using this
 
-open sorce repository [Timeline layout](https://github.com/vipulasri/Timeline-View)
+open source repository [Timeline layout](https://github.com/vipulasri/Timeline-View)
