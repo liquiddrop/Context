@@ -14,6 +14,8 @@ import com.github.vipulasri.timelineview.TimelineView;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 /**
  * Created by Curtis on 8/12/2018.
  */
@@ -35,6 +37,11 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
                 public void onClick(View itemView) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                     historical_event current_event = mEvents.get(getAdapterPosition());
+                    //check for blank entry
+                    if(current_event.mSummary.isEmpty() || (current_event.mSummary.compareTo(" ")==0) || (current_event.mSummary.compareTo("")==0))
+                    {
+                        return;
+                    }
                     Intent myIntent = new Intent(context, popUp.class);
                     myIntent.putExtra("SUMMARY", current_event.mSummary );
                     myIntent.putExtra("DATE", current_event.mDate_string );
@@ -70,7 +77,17 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
         Log.d(TAG, "Element " + position + " set.");
         if (mEvents != null) {
             historical_event current = mEvents.get(position);
-            holder.historicalItemView.setText(current.mDate_string + " " + current.mSummary);
+            if(current.mSummary.isEmpty() || (current.mSummary.compareTo(" ")==0) || (current.mSummary.compareTo("")==0))
+            {
+                holder.mTimelineView.setMarkerSize(0);
+                holder.historicalItemView.setText("");
+                Log.d(TAG, "Element " + position + " set blank.");
+            }
+            else{
+                holder.mTimelineView.setMarkerSize(120);
+                holder.historicalItemView.setText(current.mDate_string + " " + current.mSummary);
+                Log.d(TAG, "Element " + position + " set to " + current.mDate_string);
+            }
             //holder.historicalItemView.setText(current.Field2);
         } else {
             // Covers the case of data not being ready yet.
@@ -82,6 +99,7 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
         if(hEvents != null)
         {
             mEvents = hEvents;
+            addEmptyEventsToSpace();
             notifyDataSetChanged();
         }
     }
@@ -116,5 +134,40 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
             count++;
         }
         return count;
+    }
+
+    //this is a function to add empty events to create spacing
+    public void addEmptyEventsToSpace()
+    {
+        historical_event empty = new historical_event(" ");
+        int empty_added=0, time_gap_in_hundreds=0, start_size=0;
+        if(mEvents == null || mEvents.size()==1)
+        {
+            return;
+        }
+        Log.d(TAG, "Start size " + mEvents.size());
+        start_size = mEvents.size();
+        for(int i=0; i < start_size-1; i++)
+        {
+            Log.d(TAG, "trying to access " + (i+1+empty_added) + " and " + (i+empty_added) + " and empty added is " + empty_added);
+            //calculate the time difference in hundred of years
+            time_gap_in_hundreds = abs(mEvents.get((i+1)+empty_added).mYear - mEvents.get((i)+empty_added).mYear) / 100;
+            Log.d(TAG, "year 1 is " + mEvents.get((i+1)+empty_added).mYear + " and year 2 is " + mEvents.get((i)+empty_added).mYear );
+            Log.d(TAG, "Time gap in hundreds is " + time_gap_in_hundreds);
+            if(time_gap_in_hundreds >= 1)
+            {
+                //upper bound the ammount of empty space added
+                if(time_gap_in_hundreds > 5)
+                {
+                    time_gap_in_hundreds = 5;
+                }
+                for(int j=0; j < time_gap_in_hundreds; j++)
+                {
+                    mEvents.add(((i+1)+empty_added), empty);
+                }
+                empty_added+=time_gap_in_hundreds;
+                Log.d(TAG, "amount added is " + time_gap_in_hundreds + " and new size is " + mEvents.size());
+            }
+        }
     }
 }
