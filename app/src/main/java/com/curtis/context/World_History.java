@@ -14,6 +14,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class World_History extends AppCompatActivity {
@@ -72,6 +78,18 @@ public class World_History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world__history);
         setTitle("World History");
+
+        //load the adds
+        AdView mAdView;
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new RecyclerViewFragment();
         transaction.replace(R.id.content_fragment_single, fragment);
