@@ -3,14 +3,6 @@ package com.curtis.context;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Single_List_Display extends AppCompatActivity {
 
@@ -36,7 +34,7 @@ public class Single_List_Display extends AppCompatActivity {
         //final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) item.getActionView();
 
-        searchView.setLayoutParams(new ActionBar.LayoutParams(Gravity.RIGHT));
+        searchView.setLayoutParams(new ActionBar.LayoutParams(Gravity.END));
         // Assumes current activity is the searchable activity
         //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
