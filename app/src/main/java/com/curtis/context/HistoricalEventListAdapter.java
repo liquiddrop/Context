@@ -2,13 +2,15 @@ package com.curtis.context;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.vipulasri.timelineview.TimelineView;
 
 import java.util.Iterator;
@@ -29,7 +31,7 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
 
         private HistoricalEventViewHolder(View itemView, int viewType, final Context context){
             super(itemView);
-            mTimelineView = (TimelineView) itemView.findViewById(R.id.time_marker);
+            mTimelineView = itemView.findViewById(R.id.time_marker);
             mTimelineView.initLine(viewType);
             // Define click listener for the ViewHolder's View.
             itemView.setOnClickListener(new View.OnClickListener() {

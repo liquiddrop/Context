@@ -1,18 +1,17 @@
 package com.curtis.context;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.ImageButton;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,13 +43,13 @@ public class AdditionActivity extends AppCompatActivity {
         for (int i = 0; i < input.size(); i++) {
             if (countMap.containsKey(input.get(i))) {
 
-                // If char is present in charCountMap,
+                // If string is present in CountMap,
                 // incrementing it's count by 1
                 countMap.put(input.get(i), countMap.get(input.get(i)) + 1);
             }
             else {
 
-                // If char is not present in charCountMap,
+                // If string is not present in CountMap,
                 // putting this char to charCountMap with 1 as it's value
                 countMap.put(input.get(i), 1);
             }
@@ -241,6 +240,5 @@ public class AdditionActivity extends AppCompatActivity {
             intent.putExtra(multi_message[2], multi_message[3]);
         }
         startActivity(intent);
-        return;
     }
 }
