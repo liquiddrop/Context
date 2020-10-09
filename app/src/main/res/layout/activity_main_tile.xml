@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.curtis.context.MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/front_page_explanation"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026">
+    </TextView>
+
     <AutoCompleteTextView
         android:id="@+id/countryEditText"
         android:layout_width="175dp"
