@@ -74,7 +74,6 @@ dependencies {
     // Room components
     implementation 'androidx.room:room-runtime:2.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.firebase:firebase-ads:18.3.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
     androidTestImplementation 'androidx.room:room-testing:2.0.0'
     // Lifecycle components
