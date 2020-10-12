@@ -80,13 +80,11 @@ public class AdditionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "We are in on Create of Main activity");
         context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tile);
         setTitle("Add Timeline");
 
-        Log.i(TAG, "We are in on Create of Addition activity");
         Intent intent = getIntent();
         extras = intent.getExtras();
         Value = "There was no input!";
@@ -98,10 +96,14 @@ public class AdditionActivity extends AppCompatActivity {
                     Key = bundleKeys[i];
                 }
             }
-            Log.i(TAG, "Clicked Go for " + Value);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked Go for " + Value);
+            }
         }
         else{
-            Log.i(TAG, "No extras so probably from world history");
+            if(extraDebug) {
+                Log.i(TAG, "No extras so probably from world history");
+            }
         }
 
         viewModel = ViewModelProviders.of(this).get(HistoricalEventViewModel.class);
@@ -110,7 +112,6 @@ public class AdditionActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<String> countries) {
                 // Update the cached copy of the words in the adapter.
-                Log.i(TAG, "In get events with importance");
                 if(countries.isEmpty())
                 {
                     Log.i(TAG, "Countries is empty!");
@@ -145,7 +146,6 @@ public class AdditionActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<String> cities) {
                 // Update the cached copy of the words in the adapter.
-                Log.i(TAG, "In get events with importance");
                 if(cities.isEmpty())
                 {
                     Log.i(TAG, "Cities is empty!");
@@ -204,28 +204,36 @@ public class AdditionActivity extends AppCompatActivity {
         if(!countryText.getText().toString().equals(""))
         {
             String content = countryText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for country " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for country " + content);
+            }
             multi_message[2] = "Country";
             multi_message[3] = content;
         }
         if(!cityText.getText().toString().equals(""))
         {
             String content = cityText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for city " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for city " + content);
+            }
             multi_message[2] = "City";
             multi_message[3] = content;
         }
         if(!yearText.getText().toString().equals(""))
         {
             String content = yearText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for year " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for year " + content);
+            }
             multi_message[2] = "Year";
             multi_message[3] = content;
         }
         if(!eventText.getText().toString().equals(""))
         {
             String content = eventText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for event " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for event " + content);
+            }
             multi_message[2] = "Event";
             multi_message[3] = content;
         }

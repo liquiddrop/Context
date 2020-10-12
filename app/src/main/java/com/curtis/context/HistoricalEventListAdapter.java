@@ -24,6 +24,7 @@ import static java.lang.Math.abs;
 
 public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalEventListAdapter.HistoricalEventViewHolder> {
     private static final String TAG = "HistoricalEventAdapter";
+    private boolean extraDebug=false;
 
     class HistoricalEventViewHolder extends RecyclerView.ViewHolder {
         private final TextView historicalItemView;
@@ -37,7 +38,9 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View itemView) {
-                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    if(extraDebug) {
+                        Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    }
                     historical_event current_event = mEvents.get(getAdapterPosition());
                     //check for blank entry
                     if(current_event.mSummary.isEmpty() || (current_event.mSummary.compareTo(" ")==0) || (current_event.mSummary.compareTo("")==0))
@@ -76,19 +79,25 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
 
     @Override
     public void onBindViewHolder(HistoricalEventViewHolder holder, int position) {
-        Log.d(TAG, "Element " + position + " set.");
+        if(extraDebug) {
+            Log.d(TAG, "Element " + position + " set.");
+        }
         if (mEvents != null) {
             historical_event current = mEvents.get(position);
             if(current.mSummary.isEmpty() || (current.mSummary.compareTo(" ")==0) || (current.mSummary.compareTo("")==0))
             {
                 holder.mTimelineView.setMarkerSize(0);
                 holder.historicalItemView.setText("");
-                Log.d(TAG, "Element " + position + " set blank.");
+                if(extraDebug) {
+                    Log.d(TAG, "Element " + position + " set blank.");
+                }
             }
             else{
                 holder.mTimelineView.setMarkerSize(120);
                 holder.historicalItemView.setText(current.mDate_string + " " + current.mSummary);
-                Log.d(TAG, "Element " + position + " set to " + current.mDate_string);
+                if(extraDebug) {
+                    Log.d(TAG, "Element " + position + " set to " + current.mDate_string);
+                }
             }
             //holder.historicalItemView.setText(current.Field2);
         } else {
@@ -147,15 +156,21 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
         {
             return;
         }
-        Log.d(TAG, "Start size " + mEvents.size());
+        if(extraDebug) {
+            Log.d(TAG, "Start size " + mEvents.size());
+        }
         start_size = mEvents.size();
         for(int i=0; i < start_size-1; i++)
         {
-            Log.d(TAG, "trying to access " + (i+1+empty_added) + " and " + (i+empty_added) + " and empty added is " + empty_added);
+            if(extraDebug) {
+                Log.d(TAG, "trying to access " + (i + 1 + empty_added) + " and " + (i + empty_added) + " and empty added is " + empty_added);
+            }
             //calculate the time difference in hundred of years
             time_gap_in_hundreds = abs(mEvents.get((i+1)+empty_added).mYear - mEvents.get((i)+empty_added).mYear) / 100;
-            Log.d(TAG, "year 1 is " + mEvents.get((i+1)+empty_added).mYear + " and year 2 is " + mEvents.get((i)+empty_added).mYear );
-            Log.d(TAG, "Time gap in hundreds is " + time_gap_in_hundreds);
+            if(extraDebug) {
+                Log.d(TAG, "year 1 is " + mEvents.get((i + 1) + empty_added).mYear + " and year 2 is " + mEvents.get((i) + empty_added).mYear);
+                Log.d(TAG, "Time gap in hundreds is " + time_gap_in_hundreds);
+            }
             if(time_gap_in_hundreds >= 1)
             {
                 //upper bound the ammount of empty space added
@@ -168,7 +183,9 @@ public class HistoricalEventListAdapter extends RecyclerView.Adapter<HistoricalE
                     mEvents.add(((i+1)+empty_added), empty);
                 }
                 empty_added+=time_gap_in_hundreds;
-                Log.d(TAG, "amount added is " + time_gap_in_hundreds + " and new size is " + mEvents.size());
+                if(extraDebug) {
+                    Log.d(TAG, "amount added is " + time_gap_in_hundreds + " and new size is " + mEvents.size());
+                }
             }
         }
     }

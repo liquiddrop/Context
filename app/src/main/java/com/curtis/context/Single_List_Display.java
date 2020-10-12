@@ -21,6 +21,8 @@ public class Single_List_Display extends AppCompatActivity {
 
     public static final String TAG = "Single_List_Display";
 
+    private boolean extraDebug=false;
+
     protected RecyclerViewFragment fragment;
     protected Bundle extras;
 
@@ -92,7 +94,9 @@ public class Single_List_Display extends AppCompatActivity {
             else {
                 message = "There was no input!";
             }
-            Log.i(TAG, "Clicked Go for " + message);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked Go for " + message);
+            }
             setTitle("History of " + message);
         }
         else{

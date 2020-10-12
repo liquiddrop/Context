@@ -88,20 +88,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "We are in on Create of Main activity");
         context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tile);
 
         context.deleteDatabase("historical_events_database.db");
-        Log.i(TAG, "Entering onCreate");
         viewModel = ViewModelProviders.of(this).get(HistoricalEventViewModel.class);
 
         viewModel.getAllCountries().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable final List<String> countries) {
                 // Update the cached copy of the words in the adapter.
-                Log.i(TAG, "In get events with importance");
                 if(countries.isEmpty())
                 {
                     Log.i(TAG, "Countries is empty!");
@@ -136,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<String> cities) {
                 // Update the cached copy of the words in the adapter.
-                Log.i(TAG, "In get events with importance");
                 if(cities.isEmpty())
                 {
                     Log.i(TAG, "Cities is empty!");
@@ -187,7 +183,9 @@ public class MainActivity extends AppCompatActivity {
         if(!countryText.getText().toString().equals(""))
         {
             String content = countryText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for country " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for country " + content);
+            }
             intent.putExtra("Country", content);
             startActivity(intent);
             return;
@@ -195,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
         if(!cityText.getText().toString().equals(""))
         {
             String content = cityText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for city " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for city " + content);
+            }
             intent.putExtra("City", content);
             startActivity(intent);
             return;
@@ -203,7 +203,9 @@ public class MainActivity extends AppCompatActivity {
         if(!yearText.getText().toString().equals(""))
         {
             String content = yearText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for year " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for year " + content);
+            }
             intent.putExtra("Year", content);
             startActivity(intent);
             return;
@@ -211,7 +213,9 @@ public class MainActivity extends AppCompatActivity {
         if(!eventText.getText().toString().equals(""))
         {
             String content = eventText.getText().toString(); //gets you the contents of edit text
-            Log.i(TAG, "Clicked search for event " + content);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked search for event " + content);
+            }
             intent.putExtra("Event", content);
             startActivity(intent);
         }

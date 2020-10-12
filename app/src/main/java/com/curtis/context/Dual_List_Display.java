@@ -26,6 +26,8 @@ public class Dual_List_Display extends AppCompatActivity {
 
     private static String[] bundleKeys = { "Country","City","Year","Event", "Multi" };
 
+    private boolean extraDebug=false;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -92,7 +94,9 @@ public class Dual_List_Display extends AppCompatActivity {
                     {
                         multi_message = intent.getStringArrayExtra("Multi");
                         message = "Check multi";
-                        Log.i(TAG, "Clicked Go for " + multi_message[0] + " " + multi_message[1] + " " + multi_message[2] + " " + multi_message[3]);
+                        if(extraDebug) {
+                            Log.i(TAG, "Clicked Go for " + multi_message[0] + " " + multi_message[1] + " " + multi_message[2] + " " + multi_message[3]);
+                        }
                         has_multi = true;
                         extras_left.putString(multi_message[0], multi_message[1]);
                         extras_right.putString(multi_message[2], multi_message[3]);
@@ -103,7 +107,9 @@ public class Dual_List_Display extends AppCompatActivity {
                     }
                 }
             }
-            Log.i(TAG, "Clicked Go for " + message);
+            if(extraDebug) {
+                Log.i(TAG, "Clicked Go for " + message);
+            }
             if(!has_multi)
                 setTitle(message + " vs World");
         }

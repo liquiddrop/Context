@@ -42,6 +42,8 @@ public class RecyclerViewFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
 
+    private boolean extraDebug=false;
+
     public RecyclerView mRecyclerView;
     public TextView mEmptyView;
     protected HistoricalEventListAdapter adapter;
@@ -51,14 +53,12 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "Entering onCreate");
         viewModel = ViewModelProviders.of(this).get(HistoricalEventViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i(TAG, "Entering onCreateView");
         View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
         rootView.setTag(TAG);
 
@@ -75,13 +75,14 @@ public class RecyclerViewFragment extends Fragment {
         Bundle extras = this.getArguments();
         //If there are no arguments assume the want the whole list
         if(extras == null) {
-            Log.i(TAG, "There we no arguments to the bundle ");
+            if(extraDebug) {
+                Log.i(TAG, "There we no arguments to the bundle ");
+            }
 
             viewModel.getEventsWithImportance(5).observe(this, new Observer<List<historical_event>>() {
                 @Override
                 public void onChanged(@Nullable final List<historical_event> events) {
                     // Update the cached copy of the words in the adapter.
-                    Log.i(TAG, "In get events with importance");
                     adapter.setmEvents(events);
                     if(events.isEmpty())
                     {
@@ -94,7 +95,6 @@ public class RecyclerViewFragment extends Fragment {
         }
         else
         {
-            Log.i(TAG, "There were arguenmts passed into the fragment ");
             String searchString;
             int searchYear;
             if(extras.containsKey("Country")){
@@ -173,7 +173,9 @@ public class RecyclerViewFragment extends Fragment {
             else {
                 searchString = "There was no input!";
             }
-            Log.i(TAG, "The arguenmt is " + searchString);
+            if(extraDebug) {
+                Log.i(TAG, "The argument is " + searchString);
+            }
         }
         // Set HistoricalEventListAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(adapter);
@@ -189,12 +191,6 @@ public class RecyclerViewFragment extends Fragment {
 
     public void setListPosition(int new_position)
     {
-
         mRecyclerView.scrollToPosition(new_position);
-        //mRecyclerView.smoothScrollToPosition(new_position);
-        //((LinearLayoutManager) mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(new_position,0);
-        //((LinearLayoutManager) mRecyclerView.getLayoutManager()).scrollToPosition(new_position);
-        //((LinearLayoutManager) mRecyclerView.getLayoutManager()).smoothScrollToPosition(mRecyclerView,null,new_position);
-        //mLayoutManager.scrollToPositionWithOffset(new_position,0);
     }
 }
