@@ -16,12 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.curtis.context.AdUtil;
 
 public class Single_List_Display extends AppCompatActivity {
 
@@ -82,16 +78,10 @@ public class Single_List_Display extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_list);
 
-        //load the adds
-        AdView mAdView;
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //setup ads this only does something in the free version
+        AdUtil ads = new AdUtil();
+        ads.setUpAdView(this);
+
 
         Intent intent = getIntent();
         extras = intent.getExtras();

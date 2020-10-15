@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_tile);
 
         context.deleteDatabase("historical_events_database.db");
+        AdUtil ads = new AdUtil();
+        ads.initAds(this);
+
         viewModel = ViewModelProviders.of(this).get(HistoricalEventViewModel.class);
 
         viewModel.getAllCountries().observe(this, new Observer<List<String>>() {

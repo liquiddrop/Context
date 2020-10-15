@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -78,17 +79,11 @@ public class World_History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world__history);
         setTitle("World History");
+        Log.i(TAG, "In world history on create");
 
-        //load the adds
-        AdView mAdView;
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //setup ads this only does something in the free version
+        AdUtil ads = new AdUtil();
+        ads.setUpAdView(this);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         fragment = new RecyclerViewFragment();

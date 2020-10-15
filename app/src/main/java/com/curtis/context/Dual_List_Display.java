@@ -86,16 +86,9 @@ public class Dual_List_Display extends AppCompatActivity {
         setContentView(R.layout.activity_dual_list);
         setTitle("Compare History");
 
-        //load the adds
-        AdView mAdView;
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //setup ads this only does something in the free version
+        AdUtil ads = new AdUtil();
+        ads.setUpAdView(this);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
